@@ -1,86 +1,50 @@
 import { useEffect, useState } from "react"
 import {Link} from "react-router-dom"
-import axios from 'axios'
+
 import React from "react";
 
 
 function User(){
-//   const users=[
-//     {
-//         id:1,
-//         name:"Pavun",
-//         position:"Team Leader",
-//         office:"success",
-//         age:"26",
-//         startdate:"21/08/1996",
-//         salary:"40,000"
-//     },
-//     {
-//         id:2,
-//         name:"Guna",
-//         position:"Team guide",
-//         office:"success",
-//         age:"26",
-//         startdate:"15/10/1996",
-//         salary:"40,000"
-//     },
-//     {
-//         id:3,
-//         name:"kavin ",
-//         position:"Team officer",
-//         office:"success",
-//         age:"26",
-//         startdate:"1/01/1996",
-//         salary:"40,000"
-//     },
-//     {
-//         id:4,
-//         name:"karthi",
-//         position:"Head",
-//         office:"success",
-//         age:"26",
-//         startdate:"10/08/1997",
-//         salary:"40,000"
-//     }
-//   ]
-
-  const[users,setUsers]=useState([])
-  const[isLoading,setLoading]=useState(false)
-
-  //here useEffect is a one of hook concept.and it was used for fetch the data when compoenet is mount,ie.not at all time
-      useEffect(()=>{
-       
-       loadData()
-   
-    },[])
- 
-   //axios is a metheod,used for look like fetch the data.ie.advanced fecth concept
-   //https://63770e2281a568fc250af260.mockapi.io/users
-   let loadData=async()=>{
-        setLoading(true)
-        let users=await axios.get("http://localhost:4000/users?limit=2&offset=3");
-        
-        //console.log(users)
-        setUsers(users.data)
-        setLoading(false)
-   }
-
-   let userDelete = async (id)=>{
-   //https://63770e2281a568fc250af260.mockapi.io/users/${id}
-    try{
-        let ask= window.confirm("Do you want to delete this data.?"
-        );
-        if(ask){
-            await axios.delete(`http://localhost:4000/user/${id}`
-            );
-            loadData();
-        }
-    }catch (error){
-
+  const users=[
+    {
+        id:1,
+        name:"Pavun",
+        position:"Team Leader",
+        office:"success",
+        age:"26",
+        startdate:"21/08/1996",
+        salary:"40,000"
+    },
+    {
+        id:2,
+        name:"Guna",
+        position:"Team guide",
+        office:"success",
+        age:"26",
+        startdate:"15/10/1996",
+        salary:"40,000"
+    },
+    {
+        id:3,
+        name:"kavin ",
+        position:"Team officer",
+        office:"success",
+        age:"26",
+        startdate:"1/01/1996",
+        salary:"40,000"
+    },
+    {
+        id:4,
+        name:"karthi",
+        position:"Head",
+        office:"success",
+        age:"26",
+        startdate:"10/08/1997",
+        salary:"40,000"
     }
-    
-   }
+  ]
 
+ 
     return(
         <div class="container-fluid">
 
@@ -89,8 +53,8 @@ function User(){
                         <Link to="/portal/createuser" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i>Create user</Link>
                     </div>
-        {
-            isLoading ? <span>Loading...</span> : <div class="card shadow mb-4">
+        
+         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
             </div>
@@ -106,7 +70,6 @@ function User(){
                                 <th>Age</th>
                                 <th>Start date</th>
                                 <th>Salary</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -118,7 +81,7 @@ function User(){
                                 <th>Age</th>
                                 <th>Start date</th>
                                 <th>Salary</th>
-                                <th>Action </th>
+                                
                             </tr>
                         </tfoot>
                        <tbody>
@@ -134,13 +97,9 @@ function User(){
                                 <td>{user.position}</td>
                                 <td>{user.office}</td>
                                 <td>{user.age}</td>
-                                <td>{user.startDate}</td>
+                                <td>{user.startdate}</td>
                                 <td>{user.salary}</td>
-                                <td>
-                                    <Link to={`/portal/users/${user.id}`} className="btn btn-sm btn-warning mr-2">View</Link>
-                                    <Link to={`/portal/user/edit/${user.id}`} className="btn btn-sm btn-primary mr-2">Edit</Link>
-                                    <button onClick={()=>userDelete(user.id)} className="btn btn-sm btn-danger mr-2">Delete</button>
-                                </td>
+                                
                                 
                             </tr>
                         })}
@@ -148,15 +107,12 @@ function User(){
                         
                         </tbody> 
                             
-                        
                     </table>
                 </div>
             </div>
         </div>
 
-        }
-        
-    </div>
+     </div>
     )
 }
 export default User;

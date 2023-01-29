@@ -1,22 +1,21 @@
-import { useContext } from "react";
+
 import { useNavigate } from "react-router-dom";
-import UserContext from "./Contex";
+import React from "react";
+
 
 function Login(){
 
    const navigate=useNavigate();
-   let context = useContext(UserContext);
    
    let name="pavun"
-   let pass="ab"
+   let pass="abc"
   
    let login=()=>{
 
-   
-      
-    if(name=="pavun" && pass=="abc"){
-        context.setUserName("Hello")
+   if(name=="pavun" && pass=="abc"){
+        
     navigate("/portal/dashboard")
+   
    }else{
      alert("Invalied items")
    }
